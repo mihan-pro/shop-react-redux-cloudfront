@@ -1,4 +1,4 @@
-service: my-store-app
+service: mp-my-store-app-ed
 
 frameworkVersion: "3"
 
@@ -19,7 +19,7 @@ plugins:
 
 custom:
   client:
-    bucketName: my-store-app
+    bucketName: mp-my-store-app-ed
     distributionFolder: dist
   s3BucketName: ${self:custom.client.bucketName}
 
