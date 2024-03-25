@@ -1,4 +1,4 @@
-service: my-store-app
+service: mp-my-store-app-ed
 
 frameworkVersion: "3"
 
@@ -19,7 +19,7 @@ plugins:
 
 custom:
   client:
-    bucketName: my-store-app
+    bucketName: mp-my-store-app-ed
     distributionFolder: dist
   s3BucketName: ${self:custom.client.bucketName}
 
@@ -36,7 +36,14 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.s3BucketName}
-        AccessControl: PublicRead
+        OwnershipControls:
+            Rules:
+                - ObjectOwnership: BucketOwnerEnforced
+        PublicAccessBlockConfiguration:
+            BlockPublicAcls: false
+            IgnorePublicAcls: false
+            BlockPublicPolicy: false
+            RestrictPublicBuckets: false
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: index.html
